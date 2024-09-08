@@ -166,7 +166,7 @@ export default class RunningHorse extends Vue {
   position: relative;
   height: 600px;
   overflow: hidden;
-  border-right: 3px solid red;
+  border-right: 3px solid #D22B2B;
 }
 
 .horse-row {
@@ -181,7 +181,7 @@ export default class RunningHorse extends Vue {
 .horse-number {
   width: 50px;
   height: 50px;
-  background-color: green;
+  background-color: #5d8d59;
   color: white;
   font-weight: bold;
   font-size: 20px;

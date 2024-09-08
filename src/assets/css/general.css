@@ -1,0 +1,63 @@
+:root {
+	--bs-table-bg: #f3f0ed !important;
+}
+.main {
+    margin-top: -10px;
+    background-color: #f3f0ed !important;
+}
+.btn {
+    background-color: #2b4e80;
+    border-color: #2b4e80;
+    color: white;
+}
+.btn:hover {
+    background-color: #6c849b;
+    border-color: #2b4e80;
+    color: white;
+}
+.btn:disabled {
+    background-color: #6c849b;
+    border-color: #2b4e80;
+    color: white;
+}
+.card {
+    background-color: #f3f0ed !important;
+}
+.race {
+    background-color: white !important;
+}
+.table {
+	--bs-table-bg: #f3f0ed !important;
+}
+.bg-light {
+    background-color: #b4a8ac !important;
+}
+.bg-info {
+    background-color: #847c74 !important;
+    color: #f3f0ed;
+}
+.text-danger {
+    color: #D22B2B !important;
+    font-weight: bold;
+}
+.btn-danger {
+    background-color: #A52A2A !important;
+    border-color: #A52A2A !important;
+}
+.btn-danger:disabled, .btn-danger:hover {
+    background-color: #A95C68 !important;
+    border-color: #A95C68 !important;
+}
+.btn-success {
+    background-color: #355E3B !important;
+    border-color: #355E3B !important;
+}
+.btn-success:disabled, .btn-success:hover {
+    background-color: #5d8d59 !important;
+    border-color: #5d8d59 !important;
+}
+h2 {
+    color: #4f4e53;
+    font-weight: bolder;
+}
+

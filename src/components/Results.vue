@@ -6,7 +6,7 @@
           <h6 class="mt-1">{{race.order}}. LAP - {{ race.length }}m</h6>
         </div>
         <div>
-          <table class="table">
+          <table class="table table-light">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Position</th>
@@ -36,7 +36,7 @@
           <h6 class="mt-1">{{race.order}}. LAP - {{ race.length }}m</h6>
         </div>
         <div>
-          <table class="table">
+          <table class="table table-light">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Order</th>
