@@ -5,7 +5,7 @@
       <div class="col-6"><h5>Results</h5></div>
     </div>
     <div class="row">
-      <div class="col-6">
+      <div class="col-6 table-responsive">
         <div v-for="(race, index) in races" :key="index">
           <div class="bg-info row">
             <h6 class="mt-1">{{ race.order }}. LAP - {{ race.length }}m</h6>
