@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="d-flex justify-content-between m-3">
-      <div><h3>Horse Races</h3></div>
+      <div><h2> 🐎 Horse Races</h2></div>
       <button class="btn btn-primary" @click="generateProgram()">
         Generate Program
       </button>
     </div>
 
-    <div class="row main-inner">
-      <div>
+    <div class="row">
+      <div class="col-3">
         <div class="card">
           <div class="card-body">
             <HorseList />
@@ -16,15 +16,15 @@
         </div>
       </div>
 
-      <div>
-        <div class="card">
+      <div class="col-5">
+        <div class="card race">
           <div class="card-body">
             <Race />
           </div>
         </div>
       </div>
 
-      <div>
+      <div class="col-4">
         <div class="card">
           <div class="card-body">
             <Results />
