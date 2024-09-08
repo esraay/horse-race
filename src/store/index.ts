@@ -15,7 +15,7 @@ export interface Result {
 export interface Races {
   order: number,
   length: number,
-  selectedHorses: []
+  selectedHorses: Result[]
 }
 export interface State {
   horses: Horse[];
