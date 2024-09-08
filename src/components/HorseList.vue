@@ -2,7 +2,7 @@
   <div>
     <div class="row bg-light"><h5>Horse List (1-20)</h5></div>
     <div class="table-container">
-      <table class="table">
+      <table class="table table-light">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Name</th>
