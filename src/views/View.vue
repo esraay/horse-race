@@ -1,31 +1,39 @@
 <template>
-  <div class="row main-inner">
-    <div>
-      <div class="card">
-        <div class="card-body">
-          <HorseList />
-        </div>
-      </div>
+  <div>
+    <div class="d-flex justify-content-between m-3">
+      <div><h3>Horse Races</h3></div>
+      <button class="btn btn-primary" @click="generateProgram()">
+        Generate Program
+      </button>
     </div>
 
-    <div>
-      <div class="card">
-        <div class="card-body">
-          <Race />
+    <div class="row main-inner">
+      <div>
+        <div class="card">
+          <div class="card-body">
+            <HorseList />
+          </div>
         </div>
       </div>
-    </div>
 
-    <div>
-      <div class="card">
-        <div class="card-body">
-          <Results />
+      <div>
+        <div class="card">
+          <div class="card-body">
+            <Race />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="card-body">
+            <Results />
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
@@ -56,7 +64,6 @@ export default class Home extends Vue {
   }
 }
 </script>
-
 <style scoped>
 .main-inner {
   display: grid;

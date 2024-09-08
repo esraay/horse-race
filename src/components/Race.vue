@@ -51,7 +51,7 @@ import { mapActions, mapMutations } from "vuex";
 })
 export default class RunningHorse extends Vue {
   private tweens: gsap.core.Tween[] = [];
-  private isAnimating = false;
+  public isAnimating = false;
 
   private colorHueMapping: { [key: string]: number } = {
     red: 0,
