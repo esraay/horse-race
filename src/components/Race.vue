@@ -19,12 +19,8 @@
         <div class="horse">
           <img
             tabindex="1"
-            :src="`https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/25183210-1dfc-48ec-a0ec-73cf51de7798/d9wj681-da9662ca-2506-46d5-8fd4-0eaaaf080fcb.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI1MTgzMjEwLTFkZmMtNDhlYy1hMGVjLTczY2Y1MWRlNzc5OFwvZDl3ajY4MS1kYTk2NjJjYS0yNTA2LTQ2ZDUtOGZkNC0wZWFhYWYwODBmY2IuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.qPizcspw6FurdDTpPP6hiA-IpRflGx6EKsR-grk6gFM`"
+            src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Muybridge_race_horse_~_big_transp.gif"
             alt="Running Horse"
-            style="filter: saturate(4);"
-            :style="{
-              filter: `hue-rotate(${colorHueMapping[horse.color]}deg)`,
-            }"
           />
         </div>
       </div>
@@ -125,7 +121,7 @@ export default class RunningHorse extends Vue {
                 gsap.set(horseElement, { x: 0 });
               }
 
-              horseImage.src = "https://clipart-library.com/img/1495357.gif";
+              horseImage.src = "https://i.hizliresim.com/mykq60p.jpeg";
             },
           });
 
@@ -148,7 +144,8 @@ export default class RunningHorse extends Vue {
       const horseElement =
         horseRefs[`horse-${index}`][0]?.querySelector(".horse");
       const horseImage = horseElement?.querySelector("img") as HTMLImageElement;
-              horseImage.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/25183210-1dfc-48ec-a0ec-73cf51de7798/d9wj681-da9662ca-2506-46d5-8fd4-0eaaaf080fcb.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI1MTgzMjEwLTFkZmMtNDhlYy1hMGVjLTczY2Y1MWRlNzc5OFwvZDl3ajY4MS1kYTk2NjJjYS0yNTA2LTQ2ZDUtOGZkNC0wZWFhYWYwODBmY2IuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.qPizcspw6FurdDTpPP6hiA-IpRflGx6EKsR-grk6gFM";
+      horseImage.src =
+        "https://upload.wikimedia.org/wikipedia/commons/7/7b/Muybridge_race_horse_~_big_transp.gif";
       tween.play();
       tween.restart();
     });
@@ -181,7 +178,6 @@ export default class RunningHorse extends Vue {
 .horse-number {
   width: 50px;
   height: 50px;
-  background-color: #5d8d59;
   color: white;
   font-weight: bold;
   font-size: 20px;

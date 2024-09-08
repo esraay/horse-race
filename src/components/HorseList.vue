@@ -1,6 +1,6 @@
 <template>
-  <div class="p-2">
-    <div class="row bg-light"><h6 class="mt-1">Horse List (1-20)</h6></div>
+  <div>
+    <div class="row bg-light"><h5>Horse List (1-20)</h5></div>
     <div class="table-container">
       <table class="table table-light">
         <thead class="thead-dark">
@@ -48,5 +48,8 @@ export default class HorseList extends Vue {
 .table {
   max-height: 60% !important;
   overflow-y: scroll;
+}
+.row {
+  border: 1px solid gray;
 }
 </style>
