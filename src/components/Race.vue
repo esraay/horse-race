@@ -178,6 +178,7 @@ export default class RunningHorse extends Vue {
 .horse-number {
   width: 50px;
   height: 50px;
+  background-color: #5d8d59;
   color: white;
   font-weight: bold;
   font-size: 20px;
