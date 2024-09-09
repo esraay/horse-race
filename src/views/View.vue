@@ -67,17 +67,16 @@ export default class Home extends Vue {
 <style scoped>
 .main-inner {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 sütunlu bir grid */
-  gap: 1rem; /* Kartlar arasında boşluk */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
-
 .card {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Kartın tüm yüksekliğini kapsar */
+  height: 100%;
 }
 
 .card-body {
-  flex: 1; /* Kartın içeriği büyütülür */
+  flex: 1;
 }
 </style>

@@ -15,7 +15,6 @@
         class="horse-row"
       >
         <div class="horse-number">{{ index + 1 }}</div>
-        <!-- Green number box -->
         <div class="horse">
           <img
             tabindex="1"
@@ -187,7 +186,7 @@ export default class RunningHorse extends Vue {
   align-items: center;
   margin-right: 10px;
   border-radius: 5px;
-  z-index: 1; /* Ensure the number box is above the horse */
+  z-index: 1;
 }
 
 .horse {
