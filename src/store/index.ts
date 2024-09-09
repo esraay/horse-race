@@ -92,8 +92,12 @@ const store = new Vuex.Store<State>({
         }
       })
       state.result[resultList.length].name = horse.name;
+      if (resultList.length % 10 === 9) {
+        state.isRunning = false;
+        return;
+      }
     },
-    setIsRunning(state) { state.isRunning = !state.isRunning },
+    setIsRunning(state, running) { state.isRunning = running },
     setSelectedHorses(state, raceData) {
       state.races[raceData.race.order - 1].selectedHorses = raceData.horses;
     },
@@ -104,11 +108,11 @@ const store = new Vuex.Store<State>({
     }
   },
   actions: {
-    setActiveRace({state, commit}) {
-      if (state.races.length === state.activeRace + 1) {
-        state.activeRace = 0;
-      } else {
+    setActiveRace({state}, index) {
+      if (state.result[(state.activeRace + 1) * 10 - 1] && state.result[(state.activeRace + 1) * 10 - 1].name) {
         state.activeRace = state.activeRace + 1;
+      } else {
+        state.activeRace = 0;
       }
     },
     updateResult({ state, commit }, index) {
@@ -120,6 +124,7 @@ const store = new Vuex.Store<State>({
       commit('update', result);
     },
     generateProgram({ state, commit }) {
+      state.result = [];
       const shuffledHorses = [...state.horses].sort(() => Math.random() - 0.5);
       state.races.map((race, index) => {
         const selectedHorses = shuffledHorses.slice(index + 4, 10 + index + 4);

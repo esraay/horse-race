@@ -59,6 +59,9 @@ export default class RunningHorse extends Vue {
   get races() {
     return this.$store.state.races;
   }
+  get result() {
+    return this.$store.state.result;
+  }
   get activeRace() {
     return this.$store.state.activeRace;
   }
@@ -111,7 +114,13 @@ export default class RunningHorse extends Vue {
   }
 
   startAnimation() {
-    this.$store.commit("setIsRunning");
+    if (
+      this.result[this.races.length * 10 - 1] &&
+      this.result[this.races.length * 10 - 1].name
+    ) {
+      this.$store.dispatch("generateProgram");
+    }
+    this.$store.commit("setIsRunning", true);
     const horseRefs = this.$refs as { [key: string]: HTMLElement[] };
     this.$store.dispatch("setActiveRace");
     this.isAnimating = true;
@@ -121,8 +130,12 @@ export default class RunningHorse extends Vue {
       const horseImage = horseElement?.querySelector("img") as HTMLImageElement;
       horseImage.src =
         "https://upload.wikimedia.org/wikipedia/commons/7/7b/Muybridge_race_horse_~_big_transp.gif";
-      tween.play();
-      tween.restart();
+      if (this.result[this.activeRace * 10 - 1] && this.result[this.activeRace * 10 - 1].name) {
+        tween.play();
+        tween.restart();
+      } else {
+        tween.play();
+      }
     });
   }
 
@@ -139,7 +152,7 @@ export default class RunningHorse extends Vue {
   position: relative;
   height: 600px;
   overflow: hidden;
-  border-right: 3px solid #D22B2B;
+  border-right: 3px solid #d22b2b;
 }
 
 .horse-row {
