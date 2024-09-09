@@ -1,87 +1,44 @@
-import { expect } from 'chai'
-import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
-import View from '@/views/View.vue'
+import { expect } from 'chai';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import View from '@/views/View.vue';
 import HorseComponent from '@/components/Race.vue';
-import Vuex, { Store } from 'vuex';
-import { Horse, Result, Races, State } from '@/store/index'; // State tiplerinizi içe aktarın
+import ResultsComponent from '@/components/Results.vue';
+import HorseListComponent from '@/components/HorseList.vue';
+import Vuex from 'vuex';
+import storeConfig from '@/store/index';
+import sinon from 'sinon';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('View.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'Horse Races Generate Program'
+  it('renders title and generate button correctly', () => {
+    const msg = 'Horse Races Generate Program';
     const wrapper = shallowMount(View, {
-      propsData: { msg }
-    })
-    expect(wrapper.text()).to.include(msg)
-  })
-})
+      propsData: { msg },
+    });
+    expect(wrapper.text()).to.include(msg);
+  });
+});
 
 describe('Race.vue', () => {
-  let store: Store<State>;
-  let state: State;
+  let store: any;
 
   beforeEach(() => {
-    state = {
-      horses: [
-        { name: "Lightning", condition: 72, color: "red" },
-        { name: "Thunder", condition: 53, color: "blue" },
-        { name: "Storm", condition: 89, color: "green" },
-        { name: "Blaze", condition: 41, color: "orange" },
-        { name: "Shadow", condition: 64, color: "purple" },
-        { name: "Spirit", condition: 25, color: "pink" },
-        { name: "Comet", condition: 97, color: "brown" },
-        { name: "Tornado", condition: 12, color: "gray" },
-        { name: "Flash", condition: 85, color: "cyan" },
-        { name: "Bolt", condition: 31, color: "magenta" },
-        { name: "Fury", condition: 56, color: "yellow" },
-        { name: "Vortex", condition: 18, color: "lime" },
-        { name: "Cyclone", condition: 93, color: "olive" },
-        { name: "Whirlwind", condition: 44, color: "maroon" },
-        { name: "Phantom", condition: 67, color: "navy" },
-        { name: "Blizzard", condition: 29, color: "teal" },
-        { name: "Avalanche", condition: 90, color: "indigo" },
-        { name: "Tsunami", condition: 22, color: "violet" },
-        { name: "Inferno", condition: 78, color: "crimson" },
-        { name: "Ember", condition: 35, color: "turquoise" }
-      ],
-      result: [],
-      races: [{
-        order: 1,
-        length: 1200,
-        selectedHorses: []
-      }, {
-        order: 2,
-        length: 1400,
-        selectedHorses: []
-      },
-      {
-        order: 3,
-        length: 1600,
-        selectedHorses: []
-      },
-      {
-        order: 4,
-        length: 1800,
-        selectedHorses: []
-      },
-      {
-        order: 5,
-        length: 2000,
-        selectedHorses: []
-      },
-      {
-        order: 6,
-        length: 2200,
-        selectedHorses: []
-      }],
-      activeRace: 0
+    const actions = {
+      generateProgram: sinon.spy(),
+      updateResult: sinon.spy()
     };
 
+    const mutations = {
+      setActiveRace: sinon.spy()
+    };
     store = new Vuex.Store({
-      state,
-    } as any);
+      state: storeConfig.state,
+      actions,
+      mutations
+    });
+
   });
 
   it('renders correctly with Vuex state', () => {
@@ -90,7 +47,7 @@ describe('Race.vue', () => {
       localVue,
     });
 
-    expect(wrapper.findAll('.horse-row').length).to.equal(state.races[0].selectedHorses.length);
+    expect(wrapper.findAll('.horse-row').length).to.equal(store.state.races[0].selectedHorses.length);
   });
 
   it('should display horse number correctly', () => {
@@ -99,7 +56,7 @@ describe('Race.vue', () => {
       localVue,
     });
     const horseNumbers = wrapper.findAll('.horse-number');
-    expect(horseNumbers.length).to.equal(state.races[0].selectedHorses.length);
+    expect(horseNumbers.length).to.equal(store.state.races[0].selectedHorses.length);
 
     horseNumbers.wrappers.forEach((wrapper, index) => {
       expect(wrapper.text()).to.equal((index + 1).toString());
@@ -122,5 +79,66 @@ describe('Race.vue', () => {
     });
     await wrapper.find('button.btn-danger').trigger('click');
     expect(wrapper.vm.isAnimating).to.equal(false);
+  });
+
+  it('should generate a program', async () => {
+    await store.dispatch('generateProgram');
+    expect(store.state.races.length).to.greaterThan(0);
+  });
+});
+
+describe('Results.vue', () => {
+  let store: any;
+
+  beforeEach(() => {
+    store = new Vuex.Store({
+      state: storeConfig.state,
+    });
+
+  });
+  it('should display races correctly', () => {
+    const wrapper = shallowMount(ResultsComponent, {
+      store,
+      localVue,
+    });
+
+    expect(wrapper.findAll('.bg-info').length).to.equal(store.state.races.length * 2);
+  });
+  it('should display race info correctly', () => {
+    const wrapper = shallowMount(ResultsComponent, {
+      store,
+      localVue,
+    });
+    const tableWrapper = wrapper.findAll('.bg-info');
+    const race = store.state.races[0];
+    expect(tableWrapper.wrappers[0].text()).to.equal(`${race.order}. LAP - ${race.length}m`);
+  });
+});
+
+describe('HorseList.vue', () => {
+  let store: any;
+
+  beforeEach(() => {
+    store = new Vuex.Store({
+      state: storeConfig.state,
+    });
+
+  });
+  it('should display horses correctly', () => {
+    const wrapper = shallowMount(HorseListComponent, {
+      store,
+      localVue,
+    });
+
+    expect(wrapper.findAll('.horse').length).to.equal(store.state.horses.length);
+  });
+  it('should display horse info correctly', () => {
+    const wrapper = shallowMount(HorseListComponent, {
+      store,
+      localVue,
+    });
+    const tableWrapper = wrapper.findAll('.horse');
+    const horse = store.state.horses[0];
+    expect(tableWrapper.wrappers[0].text()).to.equal(`${horse.name}${horse.condition}${horse.color}`);
   });
 });

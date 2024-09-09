@@ -108,7 +108,7 @@ const store = new Vuex.Store<State>({
     }
   },
   actions: {
-    updateResult({ state, commit, dispatch }, index) {
+    updateResult({ state, commit }, index) {
       const result = {
         race: state.activeRace,
         name: state.races[state.activeRace - 1].selectedHorses[index].name,
