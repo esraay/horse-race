@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="d-flex justify-content-between m-3">
-      <div><h2> 🐎 Horse Races</h2></div>
-      <button class="btn btn-primary" @click="generateProgram()">
+      <div><h2>🐎 Horse Races</h2></div>
+      <button class="btn btn-primary" @click="generateProgram()" :disabled="isRunning">
         Generate Program
       </button>
     </div>
@@ -61,6 +61,9 @@ import { mapGetters, mapActions } from "vuex";
 export default class Home extends Vue {
   get races() {
     return this.$store.state.races;
+  }
+  get isRunning() {
+    return this.$store.state.isRunning;
   }
 }
 </script>

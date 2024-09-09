@@ -22,8 +22,9 @@ export interface State {
   result: Result[];
   races: Races[];
   activeRace: number;
+  isRunning: boolean;
+  isProgramCompleted: boolean;
 }
-
 const store = new Vuex.Store<State>({
   state: {
     horses: [
@@ -78,8 +79,9 @@ const store = new Vuex.Store<State>({
       length: 2200,
       selectedHorses: []
     }],
-    activeRace: 0
-
+    activeRace: 0,
+    isRunning: false,
+    isProgramCompleted: false
   },
   mutations: {
     update(state, horse) {
@@ -91,13 +93,7 @@ const store = new Vuex.Store<State>({
       })
       state.result[resultList.length].name = horse.name;
     },
-    setActiveRace(state) {
-      if (state.races.length === state.activeRace + 1) {
-        state.activeRace = 1;
-      } else {
-        state.activeRace = state.activeRace + 1;
-      }
-    },
+    setIsRunning(state) { state.isRunning = !state.isRunning },
     setSelectedHorses(state, raceData) {
       state.races[raceData.race.order - 1].selectedHorses = raceData.horses;
     },
@@ -108,17 +104,23 @@ const store = new Vuex.Store<State>({
     }
   },
   actions: {
+    setActiveRace({state, commit}) {
+      if (state.races.length === state.activeRace + 1) {
+        state.activeRace = 0;
+      } else {
+        state.activeRace = state.activeRace + 1;
+      }
+    },
     updateResult({ state, commit }, index) {
       const result = {
         race: state.activeRace,
-        name: state.races[state.activeRace - 1].selectedHorses[index].name,
+        name: state.races[state.activeRace].selectedHorses[index].name,
         order: state.result.length
       };
       commit('update', result);
     },
     generateProgram({ state, commit }) {
       const shuffledHorses = [...state.horses].sort(() => Math.random() - 0.5);
-
       state.races.map((race, index) => {
         const selectedHorses = shuffledHorses.slice(index + 4, 10 + index + 4);
         commit('setSelectedHorses', { horses: selectedHorses, race })

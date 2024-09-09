@@ -48,29 +48,6 @@ export default class RunningHorse extends Vue {
   private tweens: gsap.core.Tween[] = [];
   public isAnimating = false;
 
-  private colorHueMapping: { [key: string]: number } = {
-    red: 0,
-    blue: 210,
-    green: 120,
-    orange: 30,
-    purple: 270,
-    pink: 330,
-    brown: 15,
-    gray: 0,
-    cyan: 180,
-    magenta: 300,
-    yellow: 60,
-    lime: 75,
-    olive: 105,
-    maroon: 360,
-    navy: 240,
-    teal: 180,
-    indigo: 240,
-    violet: 270,
-    crimson: 0,
-    turquoise: 180,
-  };
-
   mounted() {
     this.$store.dispatch("generateProgram");
     this.setupAnimations();
@@ -119,7 +96,6 @@ export default class RunningHorse extends Vue {
               if (!this.isAnimating) {
                 gsap.set(horseElement, { x: 0 });
               }
-
               horseImage.src = "https://i.hizliresim.com/mykq60p.jpeg";
             },
           });
@@ -135,9 +111,9 @@ export default class RunningHorse extends Vue {
   }
 
   startAnimation() {
+    this.$store.commit("setIsRunning");
     const horseRefs = this.$refs as { [key: string]: HTMLElement[] };
-
-    this.$store.commit("setActiveRace");
+    this.$store.dispatch("setActiveRace");
     this.isAnimating = true;
     this.tweens.forEach((tween, index) => {
       const horseElement =
@@ -151,6 +127,7 @@ export default class RunningHorse extends Vue {
   }
 
   stopAnimation() {
+    this.$store.commit("setIsRunning");
     this.isAnimating = false;
     this.tweens.forEach((tween) => tween.pause());
   }

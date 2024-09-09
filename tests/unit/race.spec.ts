@@ -27,16 +27,13 @@ describe('Race.vue', () => {
   beforeEach(() => {
     const actions = {
       generateProgram: sinon.spy(),
-      updateResult: sinon.spy()
-    };
-
-    const mutations = {
+      updateResult: sinon.spy(),
       setActiveRace: sinon.spy()
     };
+
     store = new Vuex.Store({
       state: storeConfig.state,
       actions,
-      mutations
     });
 
   });
